@@ -7,6 +7,9 @@ body,
 .wrapper {
     margin: 0;
     height: 100%;
+    font-family: 'Avenir Next';
+    font-weight: 600;
+    font-size: 24px;
 }
 
 #grid {
@@ -28,7 +31,7 @@ body,
     width: 100%;
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 1s;
+    transition: transform 0.5s;
 }
 
 .card__side {
@@ -37,6 +40,9 @@ body,
     height: 100%;
     width: 100%;
     backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card__front {
