@@ -48,7 +48,6 @@ const checkMatch = () => {
         firstCard.dataset.matched = true
         secondCard.dataset.matched = true
         setsMatched++
-        console.log(setsMatched)
         if (setsMatched === 8) {
             win = true
             console.log('You won')
