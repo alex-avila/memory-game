@@ -7,21 +7,33 @@ let isChecking = false
 let setsMatched = 0
 let win = false
 
+let icons = [
+    'ra-meat',
+    'ra-cheese',
+    'ra-toast',
+    'ra-coffee-mug',
+    'ra-beer',
+    'ra-eggplant',
+    'ra-chicken-leg',
+    'ra-super-mushroom'
+]
 
 // Functions
 const generateCards = len => {
     // Generates 16 cards
     // every card has a pair that has the same data-name
     let html = ''
-    let x = [...Array(len / 2).keys()]
+    // let x = [...Array(len / 2).keys()]
+    let iconsArr = [...icons]
     for (let i = 0; i < len; i++) {
-        const randIndex = Math.floor(Math.random() * x.length)
-        const selection = x.splice(randIndex, 1)
+        const randIndex = Math.floor(Math.random() * iconsArr.length)
+        const selection = iconsArr.splice(randIndex, 1)
         if (i === 7) {
-            x = [...Array(len / 2).keys()]
+            // iconsArr = [...Array(len / 2).keys()]
+            iconsArr = [...icons]
         }
         html += `<div class="card" data-name="${selection}">` + 
-            `<div class="card__side card__front">${selection}</div>` + 
+            `<div class="ra ${selection} card__side card__front"></div>` + 
             `<div class="card__side card__back"></div>` +
             `</div>`
     }
