@@ -16,7 +16,7 @@ body,
 .wrapper {
     background: 
         linear-gradient(180deg, rgba(253, 163, 255, 0.05) 0%, rgba(201, 158, 255, 0.05) 100%),
-        linear-gradient(126.69deg, rgba(108, 41, 217, 0.2) 0.24%, rgba(140, 200, 255, 0.2) 100%),
+        linear-gradient(-25deg, rgba(108, 41, 217, 0.2) 0.24%, rgba(140, 200, 255, 0.2) 100%),
         radial-gradient(433.96px at 99.12% 97%, rgba(140, 255, 207, 0.1) 0%, rgba(107, 193, 255, 0.1) 100%)
     ;
     display: flex;
