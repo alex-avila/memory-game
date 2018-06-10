@@ -10,7 +10,7 @@ body,
     font-family: 'Avenir Next';
     font-weight: 600;
     font-size: 24px;
-    color: white;
+    color: black;
 }
 
 .wrapper {
@@ -22,14 +22,17 @@ body,
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid black;
 }
 
 .game-container {
     height: 500px;
     width: 500px;
-    background: url(../images/background.svg);
-    box-shadow: 0 45px 75px -40px #A2A8DE;
-    border-radius: 15px;
+    background: linear-gradient(-135deg, #fff, #e8e9eb 600%);
+    background: repeating-linear-gradient(45deg, #fafafa, #fafafa 10px, #eee 10px, #eee 12px);
+    border: 2px solid black;
+    box-shadow: 0 35px 105px -30px rgb(176, 181, 222);
+    border-radius: 25px;
     background: contain;
     padding: 1.618em;
 }
@@ -43,16 +46,6 @@ body,
     grid-auto-rows: 25%;
     align-content: center;
     justify-content: center;
-    animation: fadeIn 1.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
 
 .card {
@@ -66,7 +59,8 @@ body,
 }
 
 .card__side {
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.153);
+    border: 2px solid black;
+    box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.269);
     border-radius: 15px;
     position: absolute;
     height: 100%;
@@ -75,17 +69,38 @@ body,
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: match 1s;
 }
 
 .card__front {
-    background: linear-gradient(135deg, #74b9ff, #0984e3 300%);
+    /* background: repeating-linear-gradient(45deg, #fafafa, #fafafa 10px, #eee 10px, #eee 12px); */
+    background: #fafafa;
     transform: rotateY(180deg)
 }
 
 .card__back {
-    background: linear-gradient(135deg, #9beded, #24d8d5 170%);
+    background: 
+        linear-gradient(135deg, #b5e8e8, #59dcda 200%)        ;
 }
 
 .card.flipped {
     transform: rotateY(180deg)
+}
+
+@keyframes match {
+    from {
+
+    }
+    to {
+
+    }
+}
+
+@keyframes noMatch {
+    from {
+
+    }
+    to {
+
+    }
 }
