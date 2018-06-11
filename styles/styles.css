@@ -7,19 +7,16 @@ body,
 .wrapper {
     margin: 0;
     height: 100%;
-    font-family: 'Avenir Next';
+    font-family: 'Avenir';
     font-weight: 600;
-    font-size: 24px;
+    font-size: 17px;
     color: black;
 }
 
 .wrapper {
-    background: 
-        linear-gradient(180deg, rgba(253, 163, 255, 0.05) 0%, rgba(201, 158, 255, 0.05) 100%),
-        linear-gradient(-25deg, rgba(108, 41, 217, 0.2) 0.24%, rgba(140, 200, 255, 0.2) 100%),
-        radial-gradient(433.96px at 99.12% 97%, rgba(140, 255, 207, 0.1) 0%, rgba(107, 193, 255, 0.1) 100%)
-    ;
+    background: linear-gradient(180deg, rgba(253, 163, 255, 0.05) 0%, rgba(201, 158, 255, 0.05) 100%), linear-gradient(-25deg, rgba(108, 41, 217, 0.2) 0.24%, rgba(140, 200, 255, 0.2) 100%), radial-gradient(433.96px at 99.12% 97%, rgba(140, 255, 207, 0.1) 0%, rgba(107, 193, 255, 0.1) 100%);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 2px solid black;
@@ -49,7 +46,7 @@ body,
 }
 
 .card {
-    font-size: 1.25em;
+    font-size: 1.618em;
     position: relative;
     height: 100%;
     width: 100%;
@@ -79,8 +76,7 @@ body,
 }
 
 .card__back {
-    background: 
-        linear-gradient(135deg, #b5e8e8, #59dcda 200%)        ;
+    background: linear-gradient(135deg, #b5e8e8, #59dcda 200%);
 }
 
 .card.flipped {
@@ -88,19 +84,150 @@ body,
 }
 
 @keyframes match {
-    from {
-
-    }
-    to {
-
-    }
+    from {}
+    to {}
 }
 
 @keyframes noMatch {
-    from {
+    from {}
+    to {}
+}
 
+.game-wrapper {
+    width: 500px;
+}
+
+.game-menu {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1em 0.618em;
+}
+
+.reset-icon {
+    background: url(../icons/refresh.svg);
+    background-size: contain;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+#timer {
+    text-align: center;
+}
+
+.time-unit {
+    font-weight: 100;
+    margin: 0 1px 0 1px;
+}
+
+.game-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.move-stars {
+    display: inline-flex;
+    margin: 0 0 0 10px;
+}
+
+.filled-star {
+    background: url(../icons/filled-star.svg)
+}
+
+.half-star {
+    background: url(../icons/half-filled-star.svg)
+}
+
+.empty-star {
+    background: url(../icons/empty-star.svg);
+}
+
+.star {
+    display: block;
+    background-size: contain;
+    height: 18px;
+    width: 18px;
+}
+
+#modal {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.623);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.hide {
+    animation: fadeOut 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
     to {
-
+        opacity: 1;
     }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.modal-content {
+    background: repeating-linear-gradient(-45deg, #fff, #fff 10px, #fafafa 10px, #fafafa 12px);
+    border: 2px solid black;
+    border-radius: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.13);
+    padding: 1em 1.618em;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content h3 {
+    margin: 0;
+}
+
+.modal-content p {
+    font-weight: 400;
+}
+
+.modal-content button {
+    outline: none;
+    background: white;
+    border: 2px solid black;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    border-radius: 50px;
+    padding: 0.618em 1.25em;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.modal-content button::after {
+    content: "";
+    display: block;
+    background: url(../icons/arrow.svg);
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+    margin-left: 0.5em;
 }
