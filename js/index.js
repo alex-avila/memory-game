@@ -37,7 +37,6 @@ let icons = [
     'ra-super-mushroom'
 ]
 
-// Functions
 const generateCards = () => {
     let html = ''
     let iconsArr = [...icons]
@@ -61,19 +60,15 @@ const generateCards = () => {
 
 const flip = e => {
     const card = e.path[1]
-    // these two variables will be checked
-    // if I want to change the value of a variable I have to reference gameState directly 
-    // (e.g. gameState.firstCard = card)
-    let { isChecking, firstCard, moves } = gameState
-    if (moves === 0) {
+    if (gameState.moves === 0) {
         startTimer()
     }
-    if (!card.dataset.matched && !isChecking) {
-        if (!firstCard) {
+    if (!card.dataset.matched && !gameState.isChecking) {
+        if (!gameState.firstCard) {
             updateMovesAndStars(++gameState.moves)
             card.classList.toggle('flipped')
             gameState.firstCard = card
-        } else if (card !== firstCard) {
+        } else if (card !== gameState.firstCard) {
             card.classList.toggle('flipped')
             gameState.secondCard = card
             gameState.isChecking = true
@@ -91,7 +86,8 @@ const win = () => {
         defaultText
     starResult.textContent = `${gameState.stars} out of ${initialGameState.stars}`
     modal.style.display = 'flex'
-    modal.classList.toggle('fade-in')
+    modal.classList.add('fade-in')
+    modal.classList.remove('hide')
 }
 
 const checkMatch = () => {
@@ -128,6 +124,7 @@ const flipBackCards = () => {
 }
 
 const updateMovesAndStars = (moves) => {
+    // This is bad code, I should fix this maybe
     moveCounter.textContent = moves === 1 ? `${moves} Move` : `${moves} Moves`
     if (moves < 17) {
         gameState.stars = 3
@@ -153,7 +150,7 @@ const updateMovesAndStars = (moves) => {
     }
 }
 
-const updateTimer = (time) => {
+const updateTimer = time => {
     let defaultText = time.getSeconds() + '<span class="time-unit">s</span>'
     timer.innerHTML = time.getMinutes() ?
         `${time.getMinutes()}<span class="time-unit">m</span> ${defaultText}` :
@@ -181,24 +178,36 @@ const reset = () => {
 }
 
 const beginGame = () => {
+    // Create cards
     generateCards()
+
+    // Set initial values
     updateMovesAndStars(gameState.moves)
     updateTimer(gameState.timer)
+
+    // Add Event Listeners
+    resetBtn.addEventListener('click', reset)
+
+    playAgain.addEventListener('click', () => {
+        hideModal()
+        reset()
+    })
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            hideModal()
+        }
+    })
 }
 
-// Generate cards when page loads
+const hideModal = () => {
+    modal.classList.remove('fade-in')
+    modal.classList.add('hide')
+    // trigger display none slightly before hide animation ends
+    setTimeout(() => modal.style.display = 'none', 465)
+}
+
+// Take care of creating cards setting values and adding event listeners
 beginGame()
 
-// Add Event Listeners
-resetBtn.addEventListener('click', reset)
-playAgain.addEventListener('click', () => {
-    modal.classList.toggle('hide')
-    setTimeout(() => modal.style.display = 'none', 470)
-    reset()
-})
-window.addEventListener('click', (e) => {
-    if (e.target == modal) {
-        modal.classList.toggle('hide')
-        setTimeout(() => modal.style.display = 'none', 470)
-    }
-})
+
