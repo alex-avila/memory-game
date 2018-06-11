@@ -85,9 +85,7 @@ const win = () => {
         `${time.getMinutes()}<span class="time-unit">m</span> ${defaultText}` :
         defaultText
     starResult.textContent = `${gameState.stars} out of ${initialGameState.stars}`
-    modal.style.display = 'flex'
-    modal.classList.add('fade-in')
-    modal.classList.remove('hide')
+    showModal()
 }
 
 const checkMatch = () => {
@@ -198,6 +196,12 @@ const beginGame = () => {
             hideModal()
         }
     })
+}
+
+const showModal = () => {
+    modal.style.display = 'flex'
+    modal.classList.add('fade-in')
+    modal.classList.remove('hide')
 }
 
 const hideModal = () => {
