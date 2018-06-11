@@ -128,7 +128,7 @@ const flipBackCards = () => {
 }
 
 const updateMovesAndStars = (moves) => {
-    moveCounter.textContent = moves
+    moveCounter.textContent = moves === 1 ? `${moves} Move` : `${moves} Moves`
     if (moves < 17) {
         gameState.stars = 3
     } else if (moves < 22) {
@@ -192,13 +192,13 @@ beginGame()
 // Add Event Listeners
 resetBtn.addEventListener('click', reset)
 playAgain.addEventListener('click', () => {
-    reset()
-    setTimeout(() => modal.style.display = 'none', 470)
     modal.classList.toggle('hide')
+    setTimeout(() => modal.style.display = 'none', 470)
+    reset()
 })
 window.addEventListener('click', (e) => {
     if (e.target == modal) {
-        setTimeout(() => modal.style.display = 'none', 470)
         modal.classList.toggle('hide')
+        setTimeout(() => modal.style.display = 'none', 470)
     }
 })
