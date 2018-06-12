@@ -68,10 +68,13 @@ const flip = e => {
             updateMovesAndStars(++gameState.moves)
             card.classList.toggle('flipped')
             gameState.firstCard = card
+            
+            setLocalStorage()
         } else if (card !== gameState.firstCard) {
             card.classList.toggle('flipped')
             gameState.secondCard = card
             gameState.isChecking = true
+            setLocalStorage()
             setTimeout(checkMatch, 550)
         }
     }
@@ -91,6 +94,7 @@ const win = () => {
 const checkMatch = () => {
     let { firstCard, secondCard } = gameState
     if (firstCard.dataset.name === secondCard.dataset.name) {
+        // animate cards (match!)
         firstCard.classList.add('bounce')
         secondCard.classList.add('bounce')
         firstCard.dataset.matched = true
@@ -100,8 +104,8 @@ const checkMatch = () => {
             gameState.win = true
             win()
         }
-        // animate cards (match!)
     } else {
+        // animate cards (noMatch!)
         firstCard.classList.add('wiggle')
         secondCard.classList.add('wiggle')
         window.requestAnimationFrame(() => {
@@ -112,11 +116,12 @@ const checkMatch = () => {
                 secondCard.classList.toggle('flipped')
             }, 500)
         })
-        // animate cards (noMatch!)
     }
     gameState.firstCard = null
     gameState.secondCard = null
     gameState.isChecking = false
+
+    setLocalStorage()
 }
 
 const flipBackCards = () => {
@@ -169,6 +174,7 @@ const startTimer = () => {
     gameState.interval = setInterval(() => {
         gameState.timer.setSeconds(gameState.timer.getSeconds() + 1)
         updateTimer(gameState.timer)
+        setLocalStorage()
     }, 1000)
 }
 
@@ -180,6 +186,9 @@ const reset = () => {
     gameState = { ...initialGameState }
     // date object is acting weird so I'm hard resetting timer
     gameState.timer = new Date(0)
+
+    setLocalStorage()
+
     updateTimer(gameState.timer)
     updateMovesAndStars(gameState.moves)
     setTimeout(generateCards, 500)
@@ -206,7 +215,17 @@ const beginGame = () => {
             hideModal()
         }
     })
+
+    if (localStorage.length) {
+        for (let key in localStorage) {
+            gameState.key = localStorage.key
+        }
+    } else {
+        // localStorage.setItem('gameState', {})
+        setLocalStorage()
+    }
 }
+
 
 const showModal = () => {
     modal.style.display = 'flex'
@@ -219,6 +238,13 @@ const hideModal = () => {
     modal.classList.add('hide')
     // trigger display none slightly before hide animation ends
     setTimeout(() => modal.style.display = 'none', 465)
+}
+
+const setLocalStorage = () => {
+    return
+    for (let key in gameState) {
+        localStorage.setItem(key, gameState[key])
+    }
 }
 
 // Take care of creating cards setting values and adding event listeners
