@@ -9,7 +9,7 @@ body,
     height: 100%;
     font-family: 'Avenir';
     font-weight: 600;
-    font-size: 17px;
+    font-size: 18px;
     color: black;
 }
 
@@ -31,18 +31,22 @@ body,
     box-shadow: 0 35px 105px -30px rgb(176, 181, 222);
     border-radius: 25px;
     background: contain;
-    padding: 1.618em;
+    padding: 2.618em;
 }
 
 #grid {
     height: 100%;
     width: 100%;
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 15px;
     grid-template-columns: repeat(4, 25%);
     grid-auto-rows: 25%;
     align-content: center;
     justify-content: center;
+}
+
+.game-wrapper {
+    width: 500px;
 }
 
 .card {
@@ -128,10 +132,6 @@ body,
     100% {
         transform: translateY(0) rotateY(180deg);
     }
-}
-
-.game-wrapper {
-    width: 500px;
 }
 
 .game-menu {
