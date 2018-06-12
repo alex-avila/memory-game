@@ -52,7 +52,7 @@ body,
     width: 100%;
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform 0.5s;
+    transition: all 0.5s;
 }
 
 .card__side {
@@ -66,31 +66,68 @@ body,
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: match 1s;
 }
 
 .card__front {
-    /* background: repeating-linear-gradient(45deg, #fafafa, #fafafa 10px, #eee 10px, #eee 12px); */
     background: #fafafa;
-    transform: rotateY(180deg)
+    transform: rotateY(180deg);
 }
 
 .card__back {
     background: linear-gradient(135deg, #b5e8e8, #59dcda 200%);
+    transform: rotateY(0deg);
 }
 
-.card.flipped {
-    transform: rotateY(180deg)
+/* ANIMATIONS */
+
+.flipped {
+    transform: rotateY(180deg);
 }
 
-@keyframes match {
-    from {}
-    to {}
+.wiggle {
+    animation: 0.5s wiggle linear;
 }
 
-@keyframes noMatch {
-    from {}
-    to {}
+.bounce {
+    animation: 0.5s bounce linear;
+}
+
+/* this animation was resetting the card's transform property */
+/* to maintain the property I needed to set rotateY(180deg) on evert frame */
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg) rotateY(180deg);
+    }
+    25% {
+        transform: rotate(-10deg) rotateY(180deg);
+    }
+    50% {
+        transform: rotate(20deg) rotateY(180deg);
+    }
+    75% {
+        transform: rotate(-5deg) rotateY(180deg);
+    }
+    100% {
+        transform: rotate(0deg) rotateY(180deg);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0) rotateY(180deg);
+    }
+    25% {
+        transform: translateY(-20px) rotateY(180deg);
+    }
+    50% {
+        transform: translateY(5px) rotateY(180deg);
+    }
+    75% {
+        transform: translateY(-5px) rotateY(180deg);
+    }
+    100% {
+        transform: translateY(0) rotateY(180deg);
+    }
 }
 
 .game-wrapper {
@@ -160,7 +197,6 @@ body,
     display: none;
     align-items: center;
     justify-content: center;
-    
 }
 
 .fade-in {

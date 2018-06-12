@@ -47,8 +47,8 @@ const generateCards = () => {
             iconsArr = [...icons]
         }
         html += `<div class="card" data-name="${selection}">` +
-            `<div class="ra ${selection} card__side card__front"></div>` +
             `<div class="card__side card__back"></div>` +
+            `<div class="ra ${selection} card__side card__front"></div>` +
             `</div>`
     }
     grid.innerHTML = html
@@ -72,7 +72,7 @@ const flip = e => {
             card.classList.toggle('flipped')
             gameState.secondCard = card
             gameState.isChecking = true
-            setTimeout(checkMatch, 600)
+            setTimeout(checkMatch, 550)
         }
     }
 }
@@ -89,8 +89,10 @@ const win = () => {
 }
 
 const checkMatch = () => {
-    let { firstCard, secondCard, moves } = gameState
+    let { firstCard, secondCard } = gameState
     if (firstCard.dataset.name === secondCard.dataset.name) {
+        firstCard.classList.add('bounce')
+        secondCard.classList.add('bounce')
         firstCard.dataset.matched = true
         secondCard.dataset.matched = true
         gameState.setsMatched++
@@ -100,8 +102,16 @@ const checkMatch = () => {
         }
         // animate cards (match!)
     } else {
-        firstCard.classList.toggle('flipped')
-        secondCard.classList.toggle('flipped')
+        firstCard.classList.add('wiggle')
+        secondCard.classList.add('wiggle')
+        window.requestAnimationFrame(() => {
+            setTimeout(() => {
+                firstCard.classList.remove('wiggle')
+                secondCard.classList.remove('wiggle')
+                firstCard.classList.toggle('flipped')
+                secondCard.classList.toggle('flipped')
+            }, 500)
+        })
         // animate cards (noMatch!)
     }
     gameState.firstCard = null
