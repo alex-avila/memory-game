@@ -1,9 +1,9 @@
 const grid = document.getElementById('grid'),
-    moveCounter = document.getElementById('move-counter'),
+    moveCounter = document.getElementById('stats__moves'),
     resetBtn = document.getElementById('reset-btn'),
-    starOne = document.getElementById('star-1'),
-    starTwo = document.getElementById('star-2'),
-    starThree = document.getElementById('star-3'),
+    starOne = document.getElementById('star1'),
+    starTwo = document.getElementById('star2'),
+    starThree = document.getElementById('star3'),
     timer = document.getElementById('timer'),
     modal = document.getElementById('modal'),
     playAgain = document.getElementById('play-again'),
@@ -59,7 +59,9 @@ const generateCards = () => {
 }
 
 const flip = e => {
-    const card = e.path[1]
+    // It's possible to click a card side or the parent card element
+    // This ensures that the card variable selected is always correct
+    const card = e.path.length === 9 ? e.path[0] : e.path[1]
     if (gameState.moves === 0) {
         startTimer()
     }
@@ -68,13 +70,10 @@ const flip = e => {
             updateMovesAndStars(++gameState.moves)
             card.classList.toggle('flipped')
             gameState.firstCard = card
-            
-            setLocalStorage()
         } else if (card !== gameState.firstCard) {
             card.classList.toggle('flipped')
             gameState.secondCard = card
             gameState.isChecking = true
-            setLocalStorage()
             setTimeout(checkMatch, 550)
         }
     }
@@ -108,6 +107,7 @@ const checkMatch = () => {
         // animate cards (noMatch!)
         firstCard.classList.add('wiggle')
         secondCard.classList.add('wiggle')
+        // requestAnimationFrame makes the css transition more consistent
         window.requestAnimationFrame(() => {
             setTimeout(() => {
                 firstCard.classList.remove('wiggle')
@@ -120,8 +120,6 @@ const checkMatch = () => {
     gameState.firstCard = null
     gameState.secondCard = null
     gameState.isChecking = false
-
-    setLocalStorage()
 }
 
 const flipBackCards = () => {
@@ -174,7 +172,6 @@ const startTimer = () => {
     gameState.interval = setInterval(() => {
         gameState.timer.setSeconds(gameState.timer.getSeconds() + 1)
         updateTimer(gameState.timer)
-        setLocalStorage()
     }, 1000)
 }
 
@@ -186,8 +183,6 @@ const reset = () => {
     gameState = { ...initialGameState }
     // date object is acting weird so I'm hard resetting timer
     gameState.timer = new Date(0)
-
-    setLocalStorage()
 
     updateTimer(gameState.timer)
     updateMovesAndStars(gameState.moves)
@@ -215,15 +210,6 @@ const beginGame = () => {
             hideModal()
         }
     })
-
-    if (localStorage.length) {
-        for (let key in localStorage) {
-            gameState.key = localStorage.key
-        }
-    } else {
-        // localStorage.setItem('gameState', {})
-        setLocalStorage()
-    }
 }
 
 
@@ -238,13 +224,6 @@ const hideModal = () => {
     modal.classList.add('hide')
     // trigger display none slightly before hide animation ends
     setTimeout(() => modal.style.display = 'none', 465)
-}
-
-const setLocalStorage = () => {
-    return
-    for (let key in gameState) {
-        localStorage.setItem(key, gameState[key])
-    }
 }
 
 // Take care of creating cards setting values and adding event listeners

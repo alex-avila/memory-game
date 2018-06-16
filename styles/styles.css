@@ -22,7 +22,7 @@ body,
     border: 2px solid black;
 }
 
-.game-container {
+.grid__container {
     height: 500px;
     width: 500px;
     background: linear-gradient(-135deg, #fff, #e8e9eb 600%);
@@ -45,7 +45,7 @@ body,
     justify-content: center;
 }
 
-.game-wrapper {
+.game__wrapper {
     width: 500px;
 }
 
@@ -121,20 +121,20 @@ body,
         transform: translateY(0) rotateY(180deg);
     }
     25% {
-        transform: translateY(-20px) rotateY(180deg);
+        transform: translateY(-10px) rotateY(180deg);
     }
     50% {
-        transform: translateY(5px) rotateY(180deg);
+        transform: translateY(3px) rotateY(180deg);
     }
     75% {
-        transform: translateY(-5px) rotateY(180deg);
+        transform: translateY(-3px) rotateY(180deg);
     }
     100% {
         transform: translateY(0) rotateY(180deg);
     }
 }
 
-.game-menu {
+.game__menu {
     width: 100%;
     display: grid;
     align-items: center;
@@ -159,13 +159,13 @@ body,
     margin: 0 1px 0 1px;
 }
 
-.game-info {
+.game__stats {
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.move-stars {
+.stats__stars {
     display: inline-flex;
     margin: 0 0 0 10px;
 }
@@ -225,7 +225,7 @@ body,
     }
 }
 
-.modal-content {
+.modal__content {
     background: repeating-linear-gradient(-45deg, #fff, #fff 10px, #fafafa 10px, #fafafa 12px);
     border: 2px solid black;
     border-radius: 15px;
@@ -235,15 +235,16 @@ body,
     flex-direction: column;
 }
 
-.modal-content h3 {
+.modal__content h3 {
     margin: 0;
+    text-align: center;
 }
 
-.modal-content p {
+.modal__content p {
     font-weight: 400;
 }
 
-.modal-content button {
+.modal__content button {
     outline: none;
     background: white;
     border: 2px solid black;
@@ -258,7 +259,7 @@ body,
     cursor: pointer;
 }
 
-.modal-content button::after {
+.modal__content button::after {
     content: "";
     display: block;
     background: url(../icons/arrow.svg);
