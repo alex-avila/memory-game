@@ -10,7 +10,7 @@ const grid = document.getElementById('grid'),
     timeResult = document.getElementById('time-result'),
     starResult = document.getElementById('star-result')
 
-// global game state
+// Global game state
 let gameState = {
     firstCard: null,
     secondCard: null,
@@ -23,23 +23,23 @@ let gameState = {
     interval: null
 }
 
-// initial game state for resetting
+// Initial game state for resetting
 const initialGameState = { ...gameState }
 
-let icons = [
-    'ra-meat',
-    'ra-cheese',
-    'ra-toast',
-    'ra-coffee-mug',
-    'ra-beer',
-    'ra-eggplant',
-    'ra-chicken-leg',
-    'ra-super-mushroom'
-]
-
 const generateCards = () => {
+    const icons = [
+        'ra-meat',
+        'ra-cheese',
+        'ra-toast',
+        'ra-coffee-mug',
+        'ra-beer',
+        'ra-eggplant',
+        'ra-chicken-leg',
+        'ra-super-mushroom'
+    ]
     let html = ''
     let iconsArr = [...icons]
+
     for (let i = 0; i < 16; i++) {
         const randIndex = Math.floor(Math.random() * iconsArr.length)
         const selection = iconsArr.splice(randIndex, 1)
@@ -51,7 +51,9 @@ const generateCards = () => {
             `<div class="ra ${selection} card__side card__front"></div>` +
             `</div>`
     }
+
     grid.innerHTML = html
+    
     // Add event listener to each card
     for (let card of document.getElementsByClassName('card')) {
         card.addEventListener('click', flip)
@@ -62,9 +64,11 @@ const flip = e => {
     // It's possible to click a card side or the parent card element
     // This ensures that the card variable selected is always correct
     const card = e.path.length === 9 ? e.path[0] : e.path[1]
+
     if (gameState.moves === 0) {
         startTimer()
     }
+
     if (!card.dataset.matched && !gameState.isChecking) {
         if (!gameState.firstCard) {
             updateMovesAndStars(++gameState.moves)
@@ -135,7 +139,7 @@ const flipBackCards = () => {
 }
 
 const updateMovesAndStars = (moves) => {
-    // This is bad code, I should fix this maybe
+    // This isn't ideal code, it's very verbose
     moveCounter.textContent = moves === 1 ? `${moves} Move` : `${moves} Moves`
     if (moves < 17) {
         gameState.stars = 3
@@ -211,7 +215,6 @@ const beginGame = () => {
         }
     })
 }
-
 
 const showModal = () => {
     modal.style.display = 'flex'
