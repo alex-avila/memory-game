@@ -96,9 +96,9 @@ const flip = e => {
 const win = () => {
     clearInterval(gameState.interval);
     const time = gameState.timer;
-    const defaultText = time.getSeconds() + '<span class="time-unit">s</span>';
-    timeResult.innerHTML = time.getMinutes() ?
-        `${time.getMinutes()}<span class="time-unit">m</span> ${defaultText}` :
+    const defaultText = time.getUTCSeconds() + '<span class="time-unit">s</span>';
+    timeResult.innerHTML = time.getUTCMinutes() ?
+        `${time.getUTCMinutes()}<span class="time-unit">m</span> ${defaultText}` :
         defaultText;
     starResult.textContent = `${gameState.stars} out of ${initialGameState.stars}`;
     showModal();
@@ -185,9 +185,9 @@ const updateMovesAndStars = (moves) => {
  * @param {Object} time - Date object of the time elapsed in the current game session
  */
 const updateTimer = time => {
-    const defaultText = time.getSeconds() + '<span class="time-unit">s</span>';
-    timer.innerHTML = time.getMinutes() ?
-        `${time.getMinutes()}<span class="time-unit">m</span> ${defaultText}` :
+    const defaultText = time.getUTCSeconds() + '<span class="time-unit">s</span>';
+    timer.innerHTML = time.getUTCMinutes() ?
+        `${time.getUTCMinutes()}<span class="time-unit">m</span> ${defaultText}` :
         defaultText;
 };
 
@@ -196,7 +196,7 @@ const updateTimer = time => {
  */
 const startTimer = () => {
     gameState.interval = setInterval(() => {
-        gameState.timer.setSeconds(gameState.timer.getSeconds() + 1);
+        gameState.timer.setUTCSeconds(gameState.timer.getUTCSeconds() + 1);
         updateTimer(gameState.timer);
     }, 1000);
 };
