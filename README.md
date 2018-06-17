@@ -17,3 +17,7 @@ $ open index.html
 [RPG Awesome](https://github.com/nagoshiashumari/Rpg-Awesome) - The icons used to make this game more visually appealing and fun. Used as for the front side of the cards.
 [JSDoc](https://github.com/jsdoc3/jsdoc) - Tool used to create JavaScript documention pages (in the "out" directory) and used to create the format for the comments.
 [Material Design Icons](https://material.io/tools/icons) - The resource used to get the icons for the game's user interface.
+
+## Documentation
+
+docs/DOCS.md
