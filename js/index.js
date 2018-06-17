@@ -26,6 +26,9 @@ let gameState = {
 // Initial game state for resetting
 const initialGameState = { ...gameState };
 
+/**
+ * @description Generates HTML for the cards, gives each card a random icon and event listener
+ */
 const generateCards = () => {
     const icons = [
         'ra-meat',
@@ -43,9 +46,7 @@ const generateCards = () => {
     for (let i = 0; i < 16; i++) {
         const randIndex = Math.floor(Math.random() * iconsArr.length);
         const selection = iconsArr.splice(randIndex, 1);
-        if (i === 7) {
-            iconsArr = [...icons];
-        }
+        iconsArr = i === 7 ? [...icons] : iconsArr
         html += `<div class="card" data-name="${selection}">` +
             `<div class="card__side card__back"></div>` +
             `<div class="ra ${selection} card__side card__front"></div>` +
@@ -53,13 +54,18 @@ const generateCards = () => {
     }
 
     grid.innerHTML = html;
-    
+
     // Add event listener to each card
     for (let card of document.getElementsByClassName('card')) {
         card.addEventListener('click', flip);
     }
 };
 
+/**
+ * @description Handles flipping over the cards, starts the timer, updates moves, 
+ * sets firstCard and secondCard and calls function to check if cards match
+ * @param {Object} e - The event object is used to select the parent card element by using the path property
+ */
 const flip = e => {
     // It's possible to click a card side or the parent card element
     // This ensures that the card variable selected is always correct
@@ -83,6 +89,10 @@ const flip = e => {
     }
 };
 
+/**
+ * @description Handles actions to take if player wins.
+ * Clears interval, gets game results to show on winning modal, and calls function to show modal
+ */
 const win = () => {
     clearInterval(gameState.interval);
     const time = gameState.timer;
@@ -94,6 +104,10 @@ const win = () => {
     showModal();
 };
 
+/**
+ * @description Checks if cards match. Also, instantiates animations,
+ * may call win function, and resets firstCard and secondCard
+ */
 const checkMatch = () => {
     let { firstCard, secondCard } = gameState;
     if (firstCard.dataset.name === secondCard.dataset.name) {
@@ -126,6 +140,10 @@ const checkMatch = () => {
     gameState.isChecking = false;
 };
 
+/**
+ * @description When player takes action to start over,
+ * this handles flipping back all uncovered cards and setting the matched value from dataset to false
+ */
 const flipBackCards = () => {
     for (let card of document.getElementsByClassName('card')) {
         if (card.dataset.matched) {
@@ -138,18 +156,15 @@ const flipBackCards = () => {
     }
 };
 
+/**
+ * @description Updates the DOM to display new number of moves taken and new star rating
+ * @param {number} moves - The number of moves taken in the current game session
+ */
 const updateMovesAndStars = (moves) => {
     // This isn't ideal code, it's very verbose
     moveCounter.textContent = moves === 1 ? `${moves} Move` : `${moves} Moves`;
-    if (moves < 17) {
-        gameState.stars = 3;
-    } else if (moves < 22) {
-        gameState.stars = 2;
-    } else {
-        gameState.stars = 1;
-    }
+    gameState.stars = moves < 17 ? 3 : moves < 22 ? 2 : 1
     if (gameState.stars === 3) {
-        starOne.classList.add('filled-star');
         starTwo.classList.add('filled-star');
         starTwo.classList.remove('empty-star');
         starThree.classList.add('filled-star');
@@ -165,13 +180,20 @@ const updateMovesAndStars = (moves) => {
     }
 };
 
+/**
+ * @description Updates DOM to display correct time elapsed
+ * @param {Object} time - Date object of the time elapsed in the current game session
+ */
 const updateTimer = time => {
-    let defaultText = time.getSeconds() + '<span class="time-unit">s</span>';
+    const defaultText = time.getSeconds() + '<span class="time-unit">s</span>';
     timer.innerHTML = time.getMinutes() ?
         `${time.getMinutes()}<span class="time-unit">m</span> ${defaultText}` :
         defaultText;
 };
 
+/**
+ * @description Starts the timer by declaring gameState.interval as a setInterval function
+ */
 const startTimer = () => {
     gameState.interval = setInterval(() => {
         gameState.timer.setSeconds(gameState.timer.getSeconds() + 1);
@@ -179,6 +201,11 @@ const startTimer = () => {
     }, 1000);
 };
 
+/**
+ * @description Takes care of resetting the game by calling functions to 
+ * flip back uncovered cards, clear interval, reset timer, reset moves and star rating,
+ * and randomize icons for new game. Also, resets gameState to initialGameState.
+ */
 const reset = () => {
     flipBackCards();
 
@@ -195,6 +222,10 @@ const reset = () => {
     setTimeout(generateCards, 500);
 };
 
+/**
+ * @description Takes care of initial setup upon page load. Calls functions to create cards,
+ * set initial values, and adds necessary event listeners.
+ */
 const beginGame = () => {
     // Create cards
     generateCards();
@@ -218,12 +249,18 @@ const beginGame = () => {
     });
 };
 
+/**
+ * @description When called, it displays the modal
+ */
 const showModal = () => {
     modal.style.display = 'flex';
     modal.classList.add('fade-in');
     modal.classList.remove('hide');
 };
 
+/**
+ * @description When called, it hides the modal
+ */
 const hideModal = () => {
     modal.classList.remove('fade-in');
     modal.classList.add('hide');
@@ -231,7 +268,4 @@ const hideModal = () => {
     setTimeout(() => modal.style.display = 'none', 465);
 };
 
-// Take care of creating cards setting values and adding event listeners
 beginGame();
-
-
