@@ -20,4 +20,4 @@ $ open index.html
 
 ## Documentation
 
-docs/DOCS.md
+(docs/DOCS.md)
