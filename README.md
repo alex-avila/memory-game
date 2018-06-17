@@ -1,4 +1,4 @@
-# Food-based Memory Game
+# RPG Themed Memory Game
 
 This is a complete browser-based card matching game (also known as Concentration). But this isn’t just any memory game. It’s a shnazzy, well-designed, feature-packed memory game with animations added for a better user experience.
 

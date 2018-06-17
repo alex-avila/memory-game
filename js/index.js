@@ -31,14 +31,14 @@ const initialGameState = { ...gameState };
  */
 const generateCards = () => {
     const icons = [
-        'ra-meat',
-        'ra-cheese',
+        'ra-pills',
+        'ra-fox',
         'ra-toast',
-        'ra-coffee-mug',
-        'ra-beer',
-        'ra-eggplant',
-        'ra-chicken-leg',
-        'ra-super-mushroom'
+        'ra-gamepad-cross',
+        'ra-pisces',
+        'ra-perspective-dice-one',
+        'ra-skull',
+        'ra-acid'
     ];
     let html = '';
     let iconsArr = [...icons];
