@@ -1,0 +1,20 @@
+@media (max-width: 520px) {
+    .game__wrapper {
+        width: 300px;
+    }
+
+    .grid__container {
+        height: 300px;
+        width: 300px;
+        padding: 1.25em;
+    }
+
+    #grid {
+        grid-gap: 7.5px;
+    }
+
+    .game__menu {
+        font-size: 16px;
+        grid-template-columns: 2fr 3fr 5fr;
+    }
+}
