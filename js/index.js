@@ -64,12 +64,13 @@ const generateCards = () => {
 /**
  * @description Handles flipping over the cards, starts the timer, updates moves, 
  * sets firstCard and secondCard and calls function to check if cards match
- * @param {Object} e - The event object is used to select the parent card element by using the path property
+ * @param {Object} e - The event object is used to select the parent card element
  */
 const flip = e => {
     // It's possible to click a card side or the parent card element
     // This ensures that the card variable selected is always correct
-    const card = e.path.length === 9 ? e.path[0] : e.path[1];
+    const condition = [...e.target.classList].includes(className => className === 'card')
+    const card = condition ? e.target : e.target.parentElement
 
     if (gameState.moves === 0) {
         startTimer();
