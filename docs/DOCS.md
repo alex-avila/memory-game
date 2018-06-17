@@ -29,7 +29,7 @@ sets firstCard and secondCard and calls function to check if cards match
 
 ### Parameters
 
--   `e` **[Object][16]** The event object is used to select the parent card element by using the path property
+-   `e` **[Object][16]** The event object is used to select the parent card element
 
 ## win
 
